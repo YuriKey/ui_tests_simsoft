@@ -1,0 +1,11 @@
+setuptools
+wheel
+selenium
+pytest
+python-dotenv
+requests
+Faker
+allure-pytest
+allure-python-commons
+colorama
+webdriver_manager
