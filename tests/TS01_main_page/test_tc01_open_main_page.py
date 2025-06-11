@@ -1,8 +1,6 @@
-# test_tc01_open_main_page.py
-
 import allure
 
-from data.locators.main_page_locators import MainPageLocators as loc
+from data.locators.main_page_locators import NavigationLocators as loc
 from data.urls import Urls
 from pages.main_page import MainPage as mp
 

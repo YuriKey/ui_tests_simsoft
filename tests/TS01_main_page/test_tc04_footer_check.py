@@ -1,11 +1,7 @@
-# test_tc04_footer_check.py
 import allure
 
 from data.locators.main_page_locators import FooterLocators as loc
-from data.urls import Urls
 from pages.main_page import MainPage as mp
-
-urls = Urls()
 
 
 @allure.epic("Главная страница")

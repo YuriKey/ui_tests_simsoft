@@ -4,10 +4,6 @@ import allure
 import pytest
 
 from data.locators.main_page_locators import CarouselLocators as loc
-from selenium.webdriver.support import expected_conditions as EC
-from data.urls import Urls
-
-urls = Urls()
 
 
 @allure.epic("Главная страница")

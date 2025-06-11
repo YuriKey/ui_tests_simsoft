@@ -1,9 +1,7 @@
-# locators
-
 from selenium.webdriver.common.by import By
 
 
-class MainPageLocators:
+class NavigationLocators:
     NAVI_HOME_BUTTON = (By.XPATH, '//*[@id="menu-item-27578"]')
     NAVI_ALL_COURSES_BUTTON = (By.XPATH, '//*[@id="menu-item-27580"]')
     NAVI_VIDEO_TUTORIAL_BUTTON = (By.XPATH, '//*[@id="menu-item-27597"]')
@@ -16,6 +14,7 @@ class MainPageLocators:
     REGISTER_BUTTON = (By.XPATH, '//*[@class="elementor-button elementor-slide-button elementor-size-sm"][contains('
                                  'text(), "Register Now")]')
     COURSES_BLOCK_CONTAINER = (By.XPATH, '//h1[text()]/ancestor::div[contains(@class, "elementor-widget-wrap")]')
+    LIFETIME_MENU_ITEM = (By.ID, 'menu-item-27581')
 
     NAVIGATION_ELEMENTS = {
         "Home": NAVI_HOME_BUTTON,
@@ -31,6 +30,7 @@ class MainPageLocators:
 
 
 class HeaderLocators:
+    HEADER = (By.XPATH, '//*[contains(@class, "main-header-bar site-header-focus-item")]')
     PHONE1_INDIAN = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+919711-111-558")]')
     PHONE2_INDIAN = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+919711-191-558")]')
     PHONE_US = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+1 646-480-0603")]')
@@ -53,6 +53,7 @@ class HeaderLocators:
 
 
 class FooterLocators:
+    FOOTER = (By.ID, 'colophon')
     ADDRESS = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "Way2Automation")]')
     PHONE1 = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+91 97111-11-558")]')
     PHONE2 = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+91 97111-91-558")]')

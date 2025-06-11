@@ -1,7 +1,6 @@
 import allure
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
 
 from data.locators.main_page_locators import CarouselLocators as cl
 from data.urls import Urls
@@ -16,6 +15,7 @@ class MainPage(BasePage):
 
     EXPECTED_TEXTS = {
         "url_title": "Get Online Selenium Certification Course | Way2Automation",
+        "lifetime_url_title": "Lifetime Membership Club | Free Selenium, Webservices Tutorials",
         "reg_button_text": "Register Now",
         "block_courses_title": "Best Selenium Certification Course Online",
         "life_time_text": "Lifetime Membership",
@@ -36,7 +36,6 @@ class MainPage(BasePage):
         "mail2": "seleniumcoaching@gmail.com",
         "address": "Way2Automation\nCDR Complex, 3rd Floor, Naya Bans Market, Sector 15, Noida, Near sec-16 Metro "
                    "Station"
-
     }
 
     @staticmethod
@@ -44,10 +43,8 @@ class MainPage(BasePage):
             expected_elements: dict[str, tuple],
             page: BasePage
     ) -> list[str]:
-
-        missing_elements = []
-
         with allure.step(f"Проверка элементов навигации на главной странице"):
+            missing_elements = []
             for name, locator in expected_elements.items():
                 try:
                     nav_element = page.find_element(locator)
@@ -66,9 +63,8 @@ class MainPage(BasePage):
             expected_elements: dict[str, str],
             page: BasePage
     ) -> list[str]:
-
-        missing_elements = []
         with allure.step(f"Проверка элементов соцсетей в хедере страницы"):
+            missing_elements = []
             for link, locator in expected_elements.items():
                 try:
                     soc_element = page.find_element(locator)
@@ -91,5 +87,6 @@ class MainPage(BasePage):
                     pass
 
     def get_active_slide_label(self):
-        active_slide = self.find_element(cl.ACTIVE_SLIDE)
-        return active_slide.get_attribute("aria-label")
+        with allure.step("Получение aria-label активного слайда"):
+            active_slide = self.find_element(cl.ACTIVE_SLIDE)
+            return active_slide.get_attribute("aria-label")
