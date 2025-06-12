@@ -14,4 +14,4 @@ def test_check_navmenu_after_scroll(open_main_page):
         main_page.scroll_to_bottom()
 
     with allure.step('2. Проверить отображение меню навигации'):
-        assert main_page.element_is_visible(loc.HEADER)
+        assert main_page.is_element_visible(loc.HEADER)

@@ -6,5 +6,5 @@ class LifetimePage(BasePage):
         super().__init__(browser)
 
     EXPECTED_TEXTS = {
-        'lifetime_url_title': 'Lifetime Membership Club | Free Selenium, Webservices Tutorials',
+        'lifetime_url_title': 'Lifetime membership club – Way2Automation'
     }

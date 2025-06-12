@@ -11,8 +11,7 @@ class MainPage(BasePage):
         super().__init__(browser)
 
     EXPECTED_TEXTS = {
-        'url_title': 'Get Online Selenium Certification Course | Way2Automation',
-        'lifetime_url_title': 'Lifetime Membership Club | Free Selenium, Webservices Tutorials',
+        'url_title': 'Way2Automation – Expert Level Automation Trainings',
         'reg_button_text': 'Register Now',
         'block_courses_title': 'Best Selenium Certification Course Online',
         'life_time_text': 'Lifetime Membership',
@@ -37,16 +36,15 @@ class MainPage(BasePage):
 
     @staticmethod
     def check_elements_with_text(
-            expected_elements: dict[str, tuple],
+            expected_elements: dict[str, tuple[str, str]],
             page: BasePage
     ) -> list[str]:
         with allure.step(f'Проверка элементов навигации на главной странице'):
             missing_elements = []
             for name, locator in expected_elements.items():
                 try:
-                    nav_element = page.find_element(locator)
                     expected_text = name
-                    actual_text = nav_element.text
+                    actual_text = page.get_text(locator)
                     assert actual_text == expected_text, \
                         f'Текст элемента "{name}" некорректен: "{actual_text}" вместо "{expected_text}"'
 
@@ -57,7 +55,7 @@ class MainPage(BasePage):
 
     @staticmethod
     def check_social_elements(
-            expected_elements: dict[str, str],
+            expected_elements: dict[str, tuple[str, str]],
             page: BasePage
     ) -> list[str]:
         with allure.step(f'Проверка элементов соцсетей в хедере страницы'):

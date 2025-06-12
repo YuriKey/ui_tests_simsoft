@@ -13,7 +13,7 @@ urls = Urls()
 def test_following_from_navmenu(open_main_page, pages):
     main_page = open_main_page
     lifetime_page = pages.lifetime
-    exp_text = main_page.EXPECTED_TEXTS
+    exp_text = lifetime_page.EXPECTED_TEXTS
 
     with allure.step('1. Нажать кнопку "All Courses" в меню навигации.'):
         main_page.click_element(loc.NAVI_ALL_COURSES_BUTTON)
