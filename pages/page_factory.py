@@ -1,6 +1,7 @@
 from pages.base_page import BasePage
-from .home_page import HomePage
-from .login_page import LoginPage
+from pages.home_page import HomePage
+from pages.lifetime_page import LifetimePage
+from pages.login_page import LoginPage
 from pages.main_page import MainPage
 
 
@@ -33,13 +34,20 @@ class PageFactory:
             self._cache['main'] = HomePage(self.driver)
         return self._cache['main']
 
+    @property
+    def lifetime(self) -> LifetimePage:
+        if 'lifetime' not in self._cache:
+            self._cache['lifetime'] = LifetimePage(self.driver)
+        return self._cache['lifetime']
+
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""
         pages = {
             'base': self.base,
             'login': self.login,
             'main': self.main,
-            'home': self.home
+            'home': self.home,
+            'lifetime': self.lifetime
         }
         page = pages.get(page_name.lower())
         if not page:

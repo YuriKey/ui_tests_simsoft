@@ -2,7 +2,6 @@ import allure
 
 from data.locators.main_page_locators import NavigationLocators as loc
 from data.urls import Urls
-from pages.main_page import MainPage as mp
 
 urls = Urls()
 
@@ -11,34 +10,33 @@ urls = Urls()
 @allure.feature('Элементы главной страницы')
 @allure.story('Проверка открытия главной страницы')
 @allure.severity(allure.severity_level.BLOCKER)
-def test_main_page_open(browser):
-    page = mp(browser)
-    page.open(urls.MAIN_PAGE)
-    exp_text = mp.EXPECTED_TEXTS
+def test_main_page_open(pages):
+    main_page = pages.main
+    main_page.open(urls.MAIN_PAGE)
+    exp_text = main_page.EXPECTED_TEXTS
 
     with allure.step('1. Проверка текущего URL и заголовка страницы'):
-        assert page.get_current_url() == urls.MAIN_PAGE, 'Неверный URL главной страницы'
-        assert page.get_title() == exp_text['url_title'], 'Неверный заголовок страницы'
+        assert main_page.get_current_url() == urls.MAIN_PAGE, 'Неверный URL главной страницы'
+        assert main_page.get_title() == exp_text['url_title'], 'Неверный заголовок страницы'
 
     with allure.step('2. Проверка наличия и текста кнопок в блоке навигации'):
         navigation_elements = loc.NAVIGATION_ELEMENTS
-        missing_elements = mp.check_elements_with_text(navigation_elements, page)
+        missing_elements = main_page.check_elements_with_text(navigation_elements, main_page)
 
         assert not missing_elements, (f'Отсутствуют следующие элементы навигации:'
                                       f' {', '.join(missing_elements)}')
 
     with allure.step('3. Проверка наличия и текста кнопки регистрации'):
-        reg_button = page.find_element(loc.REGISTER_BUTTON)
+        reg_button = main_page.find_element(loc.REGISTER_BUTTON)
 
         assert reg_button, 'Кнопка регистрация отсутствует'
-        assert reg_button.text == exp_text['reg_button_text'], 'Неверный текст для кнопки регистрация'
+        assert reg_button.text == exp_text['reg_button_text'], 'Неверный текст для кнопки "Купшыеук Тщц"'
 
     with allure.step('4. Проверка наличия и текста блока курсов'):
-        block_element = page.find_element(loc.COURSES_BLOCK_CONTAINER)
+        block_element = main_page.find_element(loc.COURSES_BLOCK_CONTAINER)
 
         assert exp_text['block_courses_title'] in block_element.text, 'Блок курсов не содержит заголовок'
         assert exp_text['life_time_text'] in block_element.text, 'Блок курсов не содержит Lifetime Membership'
         assert exp_text['training_text'] in block_element.text, 'Блок курсов не содержит Online Training'
         assert exp_text['tutorials_text'] in block_element.text, 'Блок курсов не содержит Video Tutorials'
         assert exp_text['corporate_text'] in block_element.text, 'Блок курсов не содержит Corporate Training'
-

@@ -1,4 +1,3 @@
-# base_page.py
 import time
 
 import allure
@@ -69,12 +68,15 @@ class BasePage:
 
     def scroll_to_bottom(self):
         with allure.step('Скроллинг до конца страницы'):
-            scroll_pause_time = 1
             last_height = self.browser.execute_script('return document.body.scrollHeight')
             while True:
                 self.browser.execute_script('window.scrollTo(0, document.body.scrollHeight);')
-                time.sleep(scroll_pause_time)
+                self.await_for_js_reaction()
                 new_height = self.browser.execute_script('return document.body.scrollHeight')
                 if new_height == last_height:
                     break
                 last_height = new_height
+
+    @staticmethod
+    def await_for_js_reaction():
+        time.sleep(1)

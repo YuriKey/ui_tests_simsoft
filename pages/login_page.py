@@ -1,8 +1,4 @@
-# login_page.py
-from data.urls import Urls
 from pages.base_page import BasePage
-
-url = Urls()
 
 
 class LoginPage(BasePage):

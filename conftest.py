@@ -10,12 +10,12 @@ from data.locators.home_page_locators import HomePageLocators as hloc
 from data.locators.login_page_locators import LoginPageLocators as loc
 from data.urls import Urls
 from pages.page_factory import PageFactory
-from pages.main_page import MainPage
 
 
 @pytest.fixture
 def pages(browser):
-    return PageFactory(browser)
+    with allure.step('Инициализация страницы'):
+        return PageFactory(browser)
 
 
 @pytest.fixture(scope='function')
@@ -31,12 +31,11 @@ def browser():
         driver.quit()
 
 
-@pytest.fixture(scope='function')  # TODO: To implement Factory Pattern
-def open_main_page(browser):
+@pytest.fixture(scope='function')
+def open_main_page(pages):
     with allure.step('Открытие главной страницы'):
-        main_page = MainPage(browser)
-        browser.get(Urls.MAIN_PAGE)
-        return main_page
+        pages.main.open(Urls.MAIN_PAGE)
+        return pages.main
 
 
 @pytest.fixture(scope='function')

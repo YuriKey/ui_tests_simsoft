@@ -1,14 +1,9 @@
-# main_page.py
 import allure
-
 from selenium.common.exceptions import TimeoutException
 from selenium.webdriver.support import expected_conditions as EC
 
 from data.locators.main_page_locators import CarouselLocators as cl
-from data.urls import Urls
 from pages.base_page import BasePage
-
-url = Urls()
 
 
 class MainPage(BasePage):
@@ -92,3 +87,13 @@ class MainPage(BasePage):
         with allure.step('Получение aria-label активного слайда'):
             active_slide = self.find_element(cl.ACTIVE_SLIDE)
             return active_slide.get_attribute('aria-label')
+
+    def next_slide(self):
+        with allure.step('Переход к следующему слайду'):
+            self.click_element_by_js(cl.BTN_RIGHT)
+            self.await_for_js_reaction()
+
+    def previous_slide(self):
+        with allure.step('Переход к предыдущему слайду'):
+            self.click_element_by_js(cl.BTN_LEFT)
+            self.await_for_js_reaction()

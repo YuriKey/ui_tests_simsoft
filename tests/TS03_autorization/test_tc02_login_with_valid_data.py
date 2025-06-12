@@ -37,4 +37,3 @@ def test_login_with_valid_data(open_auth_page, pages):
             'Не корректный url страницы "Home Page"'
         assert home_page.get_title() == exp_text['page_title'], \
             'некорректный title страницы "Home Page"'
-
