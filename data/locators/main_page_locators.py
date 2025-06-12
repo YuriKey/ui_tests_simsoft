@@ -17,15 +17,15 @@ class NavigationLocators:
     LIFETIME_MENU_ITEM = (By.ID, 'menu-item-27581')
 
     NAVIGATION_ELEMENTS = {
-        "Home": NAVI_HOME_BUTTON,
-        "All Courses": NAVI_ALL_COURSES_BUTTON,
-        "Video Tutorial": NAVI_VIDEO_TUTORIAL_BUTTON,
-        "Resources": NAVI_RESOURCES_BUTTON,
-        "Careers": NAVI_CAREERS_BUTTON,
-        "Lifetime Membership": NAVI_LIFETIME_MEMBERSHIP_BUTTON,
-        "Blog": NAVI_BLOG_BUTTON,
-        "Forum": NAVI_FORUM_BUTTON,
-        "Member Login": NAVI_MEMBER_LOGIN_BUTTON
+        'Home': NAVI_HOME_BUTTON,
+        'All Courses': NAVI_ALL_COURSES_BUTTON,
+        'Video Tutorial': NAVI_VIDEO_TUTORIAL_BUTTON,
+        'Resources': NAVI_RESOURCES_BUTTON,
+        'Careers': NAVI_CAREERS_BUTTON,
+        'Lifetime Membership': NAVI_LIFETIME_MEMBERSHIP_BUTTON,
+        'Blog': NAVI_BLOG_BUTTON,
+        'Forum': NAVI_FORUM_BUTTON,
+        'Member Login': NAVI_MEMBER_LOGIN_BUTTON
     }
 
 
@@ -45,10 +45,10 @@ class HeaderLocators:
     YOUTUBE_ICON = (By.XPATH, '//a[@aria-label="YouTube"]')
 
     SOCIAL_ELEMENTS = {
-        "https://www.facebook.com/way2automation": FACEBOOK_ICON,
-        "https://in.linkedin.com/in/rahul-arora-0490b751": LINKEDIN_ICON,
-        "https://plus.google.com/u/0/+RamanAhujatheseleniumguru": GOOGLEPLUS_ICON,
-        "https://www.youtube.com/c/seleniumappiumtutorialtraining": YOUTUBE_ICON
+        'https://www.facebook.com/way2automation': FACEBOOK_ICON,
+        'https://in.linkedin.com/in/rahul-arora-0490b751': LINKEDIN_ICON,
+        'https://plus.google.com/u/0/+RamanAhujatheseleniumguru': GOOGLEPLUS_ICON,
+        'https://www.youtube.com/c/seleniumappiumtutorialtraining': YOUTUBE_ICON
     }
 
 
@@ -65,7 +65,7 @@ class FooterLocators:
 
 
 class CarouselLocators:
-    COURSES_BLOCK = (By.CSS_SELECTOR, ".pp-info-box-carousel-wrap.swiper-container-wrap")
+    COURSES_BLOCK = (By.CSS_SELECTOR, '.pp-info-box-carousel-wrap.swiper-container-wrap')
     BTN_RIGHT = (By.XPATH, '//div[@class="pp-slider-arrow swiper-button-next swiper-button-next-c50f9f0"]')
     BTN_LEFT = (By.XPATH, '//div[@class="pp-slider-arrow swiper-button-prev swiper-button-prev-c50f9f0"]')
     BANNER_CLOSE = (By.XPATH, '//*[@aria-label="Close"]')

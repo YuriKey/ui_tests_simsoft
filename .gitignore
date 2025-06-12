@@ -4,3 +4,17 @@
 ._pycache_/
 .env
 *.env
+*.xml
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+env/
+secrets.ini
+config.ini
+*.log
+*.tmp
+*.bak
+.DS_Store
+Thumbs.db
+notes.py
