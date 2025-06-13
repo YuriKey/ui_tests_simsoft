@@ -1,5 +1,3 @@
-# conftest.py
-
 import allure
 import pytest
 from selenium import webdriver
@@ -54,8 +52,5 @@ def login(open_auth_page, pages):
         page.fill_field(loc.USERNAME_DESC_FIELD, 'angular')
         page.click_element(loc.LOGIN_BUTTON)
 
-        open_auth_page.wait.until(
-            EC.visibility_of_element_located(hloc.LOGOUT_BUTTON),
-            message='Кнопка выхода не отобразилась после логина'
-        )
+        open_auth_page.is_element_visible(hloc.LOGOUT_BUTTON), 'Кнопка выхода не отобразилась после логина'
         return pages.home

@@ -31,7 +31,7 @@ def test_login_with_valid_data(open_auth_page, pages):
                      'Проверить текущий url страницы, title страницы и надпись "You\'re logged in!!"'):
         auth_page.click_element(loc.LOGIN_BUTTON), 'Не удалось нажать кнопку "Login"'
 
-        assert home_page.find_element(hloc.SUCCESS_MESSAGE).text == exp_text['success_text'], \
+        assert home_page.get_text_by_locator(hloc.SUCCESS_MESSAGE) == exp_text['success_text'], \
             'Некорректный текст на "Home Page"'
         assert home_page.get_current_url() == urls.HOME_PAGE, \
             'Не корректный url страницы "Home Page"'

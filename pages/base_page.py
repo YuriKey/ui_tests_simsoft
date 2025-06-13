@@ -69,9 +69,24 @@ class BasePage:
             except TimeoutException:
                 return False
 
-    def get_text(self, locator: tuple[str, str]) -> str:
-        with allure.step('Получение текста из элемента'):
+    def get_text_by_locator(self, locator: tuple[str, str]) -> str:
+        with allure.step('Получение текста из элемента по локатору'):
             return self.find_element(locator).text
+
+    @staticmethod
+    def get_text(element: object) -> str:
+        with allure.step('Получение текста из элемента по объекту'):
+            return element.text
+
+    @staticmethod
+    def get_attribute_(element: object, attribute_name: str) -> str:
+        with allure.step('Получение значения атрибута по объекту и имени атрибута'):
+            return element.get_attribute(attribute_name)
+
+    @staticmethod
+    def get_prop_value(element: object, property_name: str) -> str:
+        with allure.step('Получение значения свойства по объекту и имени свойства'):
+            return element.value_of_css_property(property_name)
 
     def get_title(self) -> str:
         with allure.step('Получение заголовка страницы'):

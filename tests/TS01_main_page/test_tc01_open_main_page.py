@@ -30,13 +30,16 @@ def test_main_page_open(pages):
         reg_button = main_page.find_element(loc.REGISTER_BUTTON)
 
         assert reg_button, 'Кнопка регистрация отсутствует'
-        assert reg_button.text == exp_text['reg_button_text'], 'Неверный текст для кнопки "Купшыеук Тщц"'
+        assert main_page.get_text(reg_button) == exp_text['reg_button_text'], \
+            'Неверный текст для кнопки "Register Now"'
+        print(main_page.get_text(reg_button))
 
     with allure.step('4. Проверка наличия и текста блока курсов'):
         block_element = main_page.find_element(loc.COURSES_BLOCK_CONTAINER)
+        block_text = main_page.get_text(block_element)
 
-        assert exp_text['block_courses_title'] in block_element.text, 'Блок курсов не содержит заголовок'
-        assert exp_text['life_time_text'] in block_element.text, 'Блок курсов не содержит Lifetime Membership'
-        assert exp_text['training_text'] in block_element.text, 'Блок курсов не содержит Online Training'
-        assert exp_text['tutorials_text'] in block_element.text, 'Блок курсов не содержит Video Tutorials'
-        assert exp_text['corporate_text'] in block_element.text, 'Блок курсов не содержит Corporate Training'
+        assert exp_text['block_courses_title'] in block_text, 'Блок курсов не содержит заголовок'
+        assert exp_text['life_time_text'] in block_text, 'Блок курсов не содержит Lifetime Membership'
+        assert exp_text['training_text'] in block_text, 'Блок курсов не содержит Online Training'
+        assert exp_text['tutorials_text'] in block_text, 'Блок курсов не содержит Video Tutorials'
+        assert exp_text['corporate_text'] in block_text, 'Блок курсов не содержит Corporate Training'

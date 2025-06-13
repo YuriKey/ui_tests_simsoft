@@ -10,16 +10,12 @@ from data.locators.main_page_locators import CarouselLocators as loc
 def test_courses_carousel(open_main_page):
     main_page = open_main_page
 
-    courses_block = main_page.find_element(loc.COURSES_BLOCK)
-    previous_button = main_page.find_element(loc.BTN_LEFT)
-    next_button = main_page.find_element(loc.BTN_RIGHT)
-
     with allure.step('1. Проверка блока с курсами и кнопок навигации блока'):
         main_page.scroll_to_element(loc.COURSES_BLOCK)
 
-        assert courses_block.is_displayed(), 'Блок с курсами не найден'
-        assert previous_button.is_displayed(), 'Кнопка "Влево" не найдена'
-        assert next_button.is_displayed(), 'Кнопка "Вправо" не найдена'
+        assert main_page.is_element_visible(loc.COURSES_BLOCK), 'Блок с курсами не найден'
+        assert main_page.is_element_visible(loc.BTN_LEFT), 'Кнопка "Влево" не найдена'
+        assert main_page.is_element_visible(loc.BTN_RIGHT), 'Кнопка "Вправо" не найдена'
 
     main_page.next_slide()
     main_page.close_banner()

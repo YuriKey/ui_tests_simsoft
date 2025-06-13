@@ -44,7 +44,7 @@ class MainPage(BasePage):
             for name, locator in expected_elements.items():
                 try:
                     expected_text = name
-                    actual_text = page.get_text(locator)
+                    actual_text = page.get_text_by_locator(locator)
                     assert actual_text == expected_text, \
                         f'Текст элемента "{name}" некорректен: "{actual_text}" вместо "{expected_text}"'
 
@@ -84,7 +84,7 @@ class MainPage(BasePage):
     def get_active_slide_label(self):
         with allure.step('Получение aria-label активного слайда'):
             active_slide = self.find_element(cl.ACTIVE_SLIDE)
-            return active_slide.get_attribute('aria-label')
+            return self.get_attribute_(active_slide, 'aria-label')
 
     def next_slide(self):
         with allure.step('Переход к следующему слайду'):

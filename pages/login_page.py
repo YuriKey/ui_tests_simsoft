@@ -23,5 +23,5 @@ class LoginPage(BasePage):
                 locator[0],
                 f'{locator[1]}/../label'
             )
-            label_text = self.get_text(label_locator)
+            label_text = self.get_text_by_locator(label_locator)
             return label_text

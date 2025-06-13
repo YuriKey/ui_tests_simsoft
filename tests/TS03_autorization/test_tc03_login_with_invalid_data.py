@@ -33,5 +33,5 @@ def test_login_with_invalid_data(open_auth_page):
         alert = auth_page.find_element(loc.ALERT_LOGIN_ERROR)
 
         assert auth_page.get_current_url() != urls.HOME_PAGE, 'URL страницы изменился'
-        assert alert.is_displayed(), 'Не отображается сообщение об ошибке'
-        assert alert.text == exp_text['alert_text'], 'Текст сообщения об ошибке не совпадает'
+        assert auth_page.is_element_visible(loc.ALERT_LOGIN_ERROR), 'Не отображается сообщение об ошибке'
+        assert auth_page.get_text(alert) == exp_text['alert_text'], 'Текст сообщения об ошибке не совпадает'
