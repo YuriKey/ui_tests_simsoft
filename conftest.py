@@ -57,7 +57,7 @@ def login(open_auth_page, pages):
 
 
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
-def pytest_runtest_makereport(item, call):
+def pytest_runtest_makereport(item):
     outcome = yield
     report = outcome.get_result()
 
