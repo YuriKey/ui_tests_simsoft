@@ -2,7 +2,7 @@ import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.remote.webdriver import WebDriver
 
 from data.locators.home_page_locators import HomePageLocators as hloc
 from data.locators.login_page_locators import LoginPageLocators as loc
@@ -54,3 +54,35 @@ def login(open_auth_page, pages):
 
         open_auth_page.is_element_visible(hloc.LOGOUT_BUTTON), 'Кнопка выхода не отобразилась после логина'
         return pages.home
+
+
+@pytest.hookimpl(hookwrapper=True, tryfirst=True)
+def pytest_runtest_makereport(item):
+    outcome = yield
+    report = outcome.get_result()
+
+    if report.when == "call" and report.failed:
+        driver = None
+
+        for fixture_name in item.fixturenames:
+            fixture = item.funcargs.get(fixture_name)
+
+            if hasattr(fixture, 'driver'):
+                driver = fixture.driver
+                break
+            elif hasattr(fixture, 'browser'):
+                driver = fixture.browser
+                break
+            elif isinstance(fixture, WebDriver):
+                driver = fixture
+                break
+
+        if driver:
+            try:
+                allure.attach(
+                    driver.get_screenshot_as_png(),
+                    name=f"screenshot_{item.nodeid.replace('::', '_')}",
+                    attachment_type=allure.attachment_type.PNG
+                )
+            except Exception as e:
+                print(f"Failed to take screenshot: {e}")
