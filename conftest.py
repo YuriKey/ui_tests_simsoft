@@ -65,14 +65,17 @@ def pytest_runtest_makereport(item):
         driver = None
 
         for fixture_name in item.fixturenames:
-            if fixture_name == "browser":
-                driver = item.funcargs[fixture_name]
+            fixture = item.funcargs.get(fixture_name)
+
+            if hasattr(fixture, 'driver'):
+                driver = fixture.driver
                 break
-            elif fixture_name == "pages":
-                pages = item.funcargs[fixture_name]
-                if hasattr(pages, 'driver'):
-                    driver = pages.driver
-                    break
+            elif hasattr(fixture, 'browser'):
+                driver = fixture.browser
+                break
+            elif isinstance(fixture, WebDriver):
+                driver = fixture
+                break
 
         if driver and isinstance(driver, WebDriver):
             try:
