@@ -1,7 +1,6 @@
 import allure
 
 from data.urls import Urls
-from utils.decorators import screenshot_on_failure
 
 urls = Urls()
 
@@ -10,7 +9,6 @@ urls = Urls()
 @allure.feature('Страница авторизации')
 @allure.story('Проверка открытия страницы авторизации')
 @allure.severity(allure.severity_level.CRITICAL)
-@screenshot_on_failure
 def test_open_login_page(pages):
     login_page = pages.login
     exp_text = login_page.EXPECTED_TEXTS

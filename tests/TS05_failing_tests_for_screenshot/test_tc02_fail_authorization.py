@@ -3,7 +3,6 @@ from faker import Faker
 
 from data.locators.login_page_locators import LoginPageLocators as loc
 from data.urls import Urls
-from utils.decorators import screenshot_on_failure
 
 urls = Urls()
 fake = Faker()
@@ -13,7 +12,6 @@ fake = Faker()
 @allure.feature('Страница авторизации')
 @allure.story('Авторизация с невалидным паролем')
 @allure.severity(allure.severity_level.NORMAL)
-@screenshot_on_failure
 def test_login_with_invalid_data(open_auth_page):
     auth_page = open_auth_page
     exp_text = auth_page.EXPECTED_TEXTS
