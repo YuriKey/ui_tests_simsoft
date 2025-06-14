@@ -2,7 +2,6 @@ import allure
 import pytest
 from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.support import expected_conditions as EC
 
 from data.locators.home_page_locators import HomePageLocators as hloc
 from data.locators.login_page_locators import LoginPageLocators as loc
@@ -54,3 +53,9 @@ def login(open_auth_page, pages):
 
         open_auth_page.is_element_visible(hloc.LOGOUT_BUTTON), 'Кнопка выхода не отобразилась после логина'
         return pages.home
+
+
+@pytest.fixture
+def setup(browser):
+    browser.delete_all_cookies()
+    yield
