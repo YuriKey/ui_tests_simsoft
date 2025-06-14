@@ -79,10 +79,9 @@ def pytest_runtest_makereport(item):
 
         if driver:
             try:
-                test_name = item.nodeid.replace("::", "_")
                 allure.attach(
                     driver.get_screenshot_as_png(),
-                    name=f"screenshot_{test_name}",
+                    name=f"screenshot_{item.nodeid.replace('::', '_')}",
                     attachment_type=allure.attachment_type.PNG
                 )
             except Exception as e:
