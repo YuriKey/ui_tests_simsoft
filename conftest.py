@@ -77,7 +77,7 @@ def pytest_runtest_makereport(item):
                 driver = fixture
                 break
 
-        if driver and isinstance(driver, WebDriver):
+        if driver:
             try:
                 test_name = item.nodeid.replace("::", "_")
                 allure.attach(
