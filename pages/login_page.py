@@ -16,8 +16,10 @@ class LoginPage(BasePage):
 
     EXPECTED_TEXTS = {
         'page_title': 'Protractor practice website - Registration',
+        'wrong_page_title': 'hello world',
         'not_cursor': 'not-allowed',
         'alert_text': 'Username or password is incorrect',
+        'wrong_alert_text': 'Password is incorrect',
         'success_text': "You're logged in!!",
         'username_label': 'Username',
         'password_label': 'Password',
