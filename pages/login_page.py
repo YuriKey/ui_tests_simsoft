@@ -1,6 +1,13 @@
 import allure
 
+from data import urls
 from pages.base_page import BasePage
+from faker import Faker
+from data.locators.login_page_locators import LoginPageLocators as lloc
+from data.locators.home_page_locators import HomePageLocators as hloc
+
+url = urls.Urls
+fake = Faker()
 
 
 class LoginPage(BasePage):
@@ -16,6 +23,51 @@ class LoginPage(BasePage):
         'password_label': 'Password',
         'login_button': 'Login'
     }
+
+    TEST_CASES = [
+        {
+            "name": "valid_credentials",
+            "credentials": {
+                "username": "angular",
+                "password": "password",
+                "username_desc": f"{fake.word()}"
+            },
+            "expected": {
+                "success": True,
+                "url": url.HOME_PAGE,
+                "element": hloc.SUCCESS_MESSAGE,
+                "text_key": "success_text"
+            }
+        },
+        {
+            "name": "invalid_username",
+            "credentials": {
+                "username": f"{fake.name()}",
+                "password": "password",
+                "username_desc": f"{fake.word()}",
+            },
+            "expected": {
+                "success": False,
+                "url": url.LOGIN_PAGE,
+                "element": lloc.ALERT_LOGIN_ERROR,
+                "text_key": "alert_text"
+            }
+        },
+        {
+            "name": "invalid_password",
+            "credentials": {
+                "username": "angular",
+                "password": f"{fake.password()}",
+                "username_desc": f"{fake.word()}"
+            },
+            "expected": {
+                "success": False,
+                "url": url.LOGIN_PAGE,
+                "element": lloc.ALERT_LOGIN_ERROR,
+                "text_key": "alert_text"
+            }
+        }
+    ]
 
     def get_field_label(self, locator: tuple) -> str:
         with allure.step(f'Получение текста описания поля'):
