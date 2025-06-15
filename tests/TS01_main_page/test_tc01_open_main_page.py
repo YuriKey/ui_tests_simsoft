@@ -32,7 +32,6 @@ def test_main_page_open(pages):
         assert reg_button, 'Кнопка регистрация отсутствует'
         assert main_page.get_text(reg_button) == exp_text['reg_button_text'], \
             'Неверный текст для кнопки "Register Now"'
-        print(main_page.get_text(reg_button))
 
     with allure.step('4. Проверка наличия и текста блока курсов'):
         block_element = main_page.find_element(loc.COURSES_BLOCK_CONTAINER)
