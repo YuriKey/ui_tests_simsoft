@@ -56,13 +56,13 @@ def login(open_auth_page, pages):
         open_auth_page.is_element_visible(hloc.LOGOUT_BUTTON), 'Кнопка выхода не отобразилась после логина'
         return pages.home
 
-
+      
 @pytest.fixture
 def setup(browser):
     browser.delete_all_cookies()
     yield
 
-
+    
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item):
     outcome = yield
@@ -94,7 +94,7 @@ def pytest_runtest_makereport(item):
             except Exception as e:
                 raise Exception(f'Не удалось выполнить скриншот: {str(e)}')
 
-
+                
 @pytest.fixture
 def prepare_auth_cookies(pages, request, tmp_path):
     with allure.step('Авторизация через cookies'):
