@@ -3,6 +3,7 @@ from pages.home_page import HomePage
 from pages.lifetime_page import LifetimePage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
+from pages.sqlex_page import SqlexPage
 
 
 class PageFactory:
@@ -40,6 +41,12 @@ class PageFactory:
             self._cache['lifetime'] = LifetimePage(self.driver)
         return self._cache['lifetime']
 
+    @property
+    def sqlex(self) -> SqlexPage:
+        if 'sqlex' not in self._cache:
+            self._cache['sqlex'] = SqlexPage(self.driver)
+        return self._cache['sqlex']
+
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""
         pages = {
@@ -47,7 +54,8 @@ class PageFactory:
             'login': self.login,
             'main': self.main,
             'home': self.home,
-            'lifetime': self.lifetime
+            'lifetime': self.lifetime,
+            'sqlexec': self.sqlexec
         }
         page = pages.get(page_name.lower())
         if not page:

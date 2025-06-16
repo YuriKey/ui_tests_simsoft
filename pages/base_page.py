@@ -96,6 +96,10 @@ class BasePage:
         with allure.step('Получение URL текущей страницы'):
             return self.browser.current_url
 
+    def refresh_page(self) -> None:
+        with allure.step('Обновление страницы'):
+            self.browser.refresh()
+
     def scroll_to_element(self, locator: tuple[str, str]) -> None:
         with allure.step('Скроллинг до элемента'):
             try:
@@ -104,7 +108,7 @@ class BasePage:
                                             element)
 
             except Exception as e:
-                print(f'Ошибка при скроллинге до элемента: {e}')
+                raise Exception(f'Ошибка при скроллинге до элемента: {str(e)}')
 
     def scroll_to_bottom(self) -> None:
         with allure.step('Скроллинг до конца страницы'):

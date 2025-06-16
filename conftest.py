@@ -8,6 +8,7 @@ from data.locators.home_page_locators import HomePageLocators as hloc
 from data.locators.login_page_locators import LoginPageLocators as loc
 from data.urls import Urls
 from pages.page_factory import PageFactory
+from utils.cookies_helper import CookiesHelper as ch
 
 
 @pytest.fixture
@@ -55,7 +56,13 @@ def login(open_auth_page, pages):
         open_auth_page.is_element_visible(hloc.LOGOUT_BUTTON), 'Кнопка выхода не отобразилась после логина'
         return pages.home
 
+      
+@pytest.fixture
+def setup(browser):
+    browser.delete_all_cookies()
+    yield
 
+    
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item):
     outcome = yield
@@ -85,4 +92,24 @@ def pytest_runtest_makereport(item):
                     attachment_type=allure.attachment_type.PNG
                 )
             except Exception as e:
-                print(f"Failed to take screenshot: {e}")
+                raise Exception(f'Не удалось выполнить скриншот: {str(e)}')
+
+                
+@pytest.fixture
+def prepare_auth_cookies(pages, request, tmp_path):
+    with allure.step('Авторизация через cookies'):
+        cookies_file = tmp_path / "test_cookies.json"
+        sqlex_page = pages.sqlex.open_page()
+        cookies_helper = ch(sqlex_page, str(cookies_file))
+
+        sqlex_page.sqlex_login()
+
+        cookies = cookies_helper.get_cookies()
+
+        ch.save_cookies_to_file(cookies, str(cookies_file))
+
+        cookies_helper.delete_browser_cookies()
+
+        request.addfinalizer(cookies_helper.cleanup)
+
+        return cookies_file
