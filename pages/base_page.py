@@ -69,6 +69,21 @@ class BasePage:
             except TimeoutException:
                 return False
 
+    def set_focus(self, locator: tuple[str, str]) -> None:
+        with allure.step('Установка фокуса на элементе'):
+            self.click_element(locator)
+
+    def del_focus(self) -> None:
+        with allure.step('Удаление фокуса с элемента'):
+            self.browser.execute_script("document.activeElement.blur()")
+
+    def is_focused(self, locator: tuple[str, str]) -> bool:
+        with allure.step('Проверка фокуса на элементе'):
+            return self.browser.execute_script(
+                "return document.activeElement === arguments[0];",
+                self.browser.find_element(*locator)
+            )
+
     def get_text_by_locator(self, locator: tuple[str, str]) -> str:
         with allure.step('Получение текста из элемента по локатору'):
             return self.find_element(locator).text
@@ -120,6 +135,22 @@ class BasePage:
                 if new_height == last_height:
                     break
                 last_height = new_height
+
+    def is_scroll(self, method: str) -> bool:
+        with allure.step('Проверка наличия скролла на странице'):
+            try:
+                if method == 'vertical':
+                    return self.browser.execute_script(
+                        "return document.documentElement.scrollHeight > document.documentElement.clientHeight;"
+                    )
+                elif method == 'horizontal':
+                    return self.browser.execute_script(
+                        "return document.documentElement.scrollWidth > document.documentElement.clientWidth;"
+                    )
+                else:
+                    raise ValueError(f'Неподдерживаемый метод скроллинга: {method}')
+            except Exception as e:
+                raise Exception(f'Ошибка при проверке наличия {method} скролла: {str(e)}')
 
     @staticmethod
     def await_for_js_reaction() -> None:
