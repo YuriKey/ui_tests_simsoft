@@ -11,23 +11,35 @@ from pages.page_factory import PageFactory
 from utils.cookies_helper import CookiesHelper as ch
 
 
+@pytest.fixture(scope="function")  # Для запуска в Selenium Grid
+def browser():
+    with allure.step('Запуск браузера в Selenium Grid'):
+        options = Options()
+        options.add_argument('--start-maximized')
+        driver = webdriver.Remote(
+            command_executor="http://localhost:4444/wd/hub",
+            options=options
+        )
+        yield driver
+        driver.quit()
+
+# @pytest.fixture(scope='function')  # Для запуска в локальном браузере
+# def browser():
+#     with allure.step('Запуск браузера'):
+#         chrome_options = Options()
+#         chrome_options.add_argument('--start-maximized')
+#         driver = webdriver.Chrome(options=chrome_options)
+#         driver.implicitly_wait(10)
+#
+#     yield driver
+#     with allure.step('Закрытие браузера'):
+#         driver.quit()
+
+
 @pytest.fixture
 def pages(browser):
     with allure.step('Инициализация страницы'):
         return PageFactory(browser)
-
-
-@pytest.fixture(scope='function')
-def browser():
-    with allure.step('Запуск браузера'):
-        chrome_options = Options()
-        chrome_options.add_argument('--start-maximized')
-        driver = webdriver.Chrome(options=chrome_options)
-        driver.implicitly_wait(10)
-
-    yield driver
-    with allure.step('Закрытие браузера'):
-        driver.quit()
 
 
 @pytest.fixture(scope='function')
