@@ -1,39 +1,39 @@
 import allure
 import pytest
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.remote.webdriver import WebDriver
 
 from data.locators.home_page_locators import HomePageLocators as hloc
 from data.locators.login_page_locators import LoginPageLocators as loc
 from data.urls import Urls
+from drivers.driver_factory import DriverFactory
 from pages.page_factory import PageFactory
 from utils.cookies_helper import CookiesHelper as ch
 
 
-@pytest.fixture(scope="function")  # Для запуска в Selenium Grid
-def browser():
-    with allure.step('Запуск браузера в Selenium Grid'):
-        options = Options()
-        options.add_argument('--start-maximized')
-        driver = webdriver.Remote(
-            command_executor="http://localhost:4444/wd/hub",
-            options=options
-        )
-        yield driver
-        driver.quit()
+def pytest_addoption(parser):
+    parser.addoption("--browser", action="store", default="chrome",
+                     help="Browser to run tests (chrome, firefox, edge, ie)")
+    parser.addoption("--grid", action="store_true", default=False,
+                     help="Use Selenium Grid")
+    parser.addoption("--grid-url", action="store", default="http://localhost:4444/wd/hub",
+                     help="Selenium Grid URL")
 
-# @pytest.fixture(scope='function')  # Для запуска в локальном браузере
-# def browser():
-#     with allure.step('Запуск браузера'):
-#         chrome_options = Options()
-#         chrome_options.add_argument('--start-maximized')
-#         driver = webdriver.Chrome(options=chrome_options)
-#         driver.implicitly_wait(10)
-#
-#     yield driver
-#     with allure.step('Закрытие браузера'):
-#         driver.quit()
+
+@pytest.fixture
+def browser(request):
+    browser_name = request.config.getoption("--browser")
+    use_grid = request.config.getoption("--grid")
+    grid_url = request.config.getoption("--grid-url")
+
+    driver = DriverFactory.create_driver(
+        browser_name=browser_name,
+        use_grid=use_grid,
+        grid_url=grid_url
+    )
+
+    yield driver
+
+    driver.quit()
 
 
 @pytest.fixture
@@ -68,13 +68,13 @@ def login(open_auth_page, pages):
         open_auth_page.is_element_visible(hloc.LOGOUT_BUTTON), 'Кнопка выхода не отобразилась после логина'
         return pages.home
 
-      
+
 @pytest.fixture
 def setup(browser):
     browser.delete_all_cookies()
     yield
 
-    
+
 @pytest.hookimpl(hookwrapper=True, tryfirst=True)
 def pytest_runtest_makereport(item):
     outcome = yield
@@ -106,7 +106,7 @@ def pytest_runtest_makereport(item):
             except Exception as e:
                 raise Exception(f'Не удалось выполнить скриншот: {str(e)}')
 
-                
+
 @pytest.fixture
 def prepare_auth_cookies(pages, request, tmp_path):
     with allure.step('Авторизация через cookies'):
