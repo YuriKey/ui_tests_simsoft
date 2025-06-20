@@ -39,7 +39,7 @@
 │    ├── TS05_failing_tests_for_screenshot/         # Падающие тесты для проверки создания скриншотов.
 │    ├── TS06_auth_with_cookies/                    # Проверка авторизации с помощью cookies на sql-ex.ru.
 │    ├── TS07_js_executor/                          # Тесты с использованием JavascriptExecutor.
-│    └── test_cases.md                             # Тест-кейсы
+│    └── test_cases.md                              # Тест-кейсы
 │
 ├── utils/                                          # Вспомогательные модули.
 │    ├── cookies_helper                             # Модуль для работы с cookies.
@@ -57,14 +57,12 @@
 
 ---
 
-| Браузер / тип запуска       | Команда запуска тестов                                                                                    |
-|-----------------------------|-----------------------------------------------------------------------------------------------------------|
-| Chrome / локально           | pytest --browser=chrome                                                                                   |
-| Firefox / локально          | pytest --browser=firefox                                                                                  |
-| Edge / локально             | pytest --browser=edge                                                                                     |
-| IE / локально               | pytest --browser=ie                                                                                       |
-| Chrome / Selenium Grid      | ./scripts/start_grid.bat<br>pytest --browser=chrome --grid                                                |
-| Firefox / Selenium Grid     | ./scripts/start_grid.bat<br>pytest --browser=firefox --grid                                               |
-| Edge / Selenium Grid        | ./scripts/start_grid.bat<br>pytest --browser=edge --grid                                                  |
-| IE / Selenium Grid          | ./scripts/start_grid.bat<br>pytest --browser=ie --grid                                                    |
-| С указанием своего Grid URL | ./scripts/start_grid.bat<br>pytest --browser=[browser] --grid --grid-url=http://your-grid-hub:4444/wd/hub |
+| Браузер / тип запуска       | Команда запуска тестов                                                                                                                             |
+|-----------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| Chrome / локально           | ```pytest``` _(Chrome определен как браузер по умолчанию)_                                                                                         |
+| Firefox / локально          | ```pytest --browser=firefox```                                                                                                                     |
+| Edge / локально             | ```pytest --browser=edge```                                                                                                                        |
+| Chrome / Selenium Grid      | Запустить кластер Grid, если не запущен ранее: ```./scripts/start_grid.bat```<br>```pytest --grid``` _(Chrome определен как браузер по умолчанию)_ |
+| Firefox / Selenium Grid     | Запустить кластер Grid, если не запущен ранее: ```./scripts/start_grid.bat```<br>```pytest --browser=firefox --grid```                             |
+| Edge / Selenium Grid        | Запустить кластер Grid, если не запущен ранее: ```./scripts/start_grid.bat```<br>```pytest --browser=edge --grid```                                |
+| С указанием своего Grid URL | ```./scripts/start_grid.bat```<br>```pytest --browser=[browser] --grid --grid-url=http://your-grid-hub:4444/wd/hub```                              |

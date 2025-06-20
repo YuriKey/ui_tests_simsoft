@@ -12,7 +12,7 @@ from utils.cookies_helper import CookiesHelper as ch
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome",
-                     help="Browser to run tests (chrome, firefox, edge, ie)")
+                     help="Browser to run tests (chrome, firefox, edge)")
     parser.addoption("--grid", action="store_true", default=False,
                      help="Use Selenium Grid")
     parser.addoption("--grid-url", action="store", default="http://localhost:4444/wd/hub",
@@ -21,19 +21,20 @@ def pytest_addoption(parser):
 
 @pytest.fixture
 def browser(request):
-    browser_name = request.config.getoption("--browser")
-    use_grid = request.config.getoption("--grid")
-    grid_url = request.config.getoption("--grid-url")
+    with allure.step('Инициализация драйвера'):
+        browser_name = request.config.getoption("--browser")
+        use_grid = request.config.getoption("--grid")
+        grid_url = request.config.getoption("--grid-url")
 
-    driver = DriverFactory.create_driver(
-        browser_name=browser_name,
-        use_grid=use_grid,
-        grid_url=grid_url
-    )
+        driver = DriverFactory.create_driver(
+            browser_name=browser_name,
+            use_grid=use_grid,
+            grid_url=grid_url
+        )
 
-    yield driver
+        yield driver
 
-    driver.quit()
+        driver.quit()
 
 
 @pytest.fixture
