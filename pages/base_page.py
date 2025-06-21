@@ -2,6 +2,7 @@ import time
 
 import allure
 from selenium.common import TimeoutException
+from selenium.webdriver.remote.webelement import WebElement
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -11,7 +12,7 @@ class BasePage:
         self.browser = browser
         self.wait = WebDriverWait(self.browser, 10)
 
-    def find_element(self, locator: tuple[str, str]) -> object:
+    def find_element(self, locator: tuple[str, str]) -> WebElement:
         with allure.step(f'Поиск элемента по локатору {locator}'):
             return self.wait.until(EC.visibility_of_element_located(locator))
 

@@ -1,4 +1,5 @@
 from pages.base_page import BasePage
+from pages.droppable_page import DndPage
 from pages.home_page import HomePage
 from pages.lifetime_page import LifetimePage
 from pages.login_page import LoginPage
@@ -47,6 +48,12 @@ class PageFactory:
             self._cache['sqlex'] = SqlexPage(self.driver)
         return self._cache['sqlex']
 
+    @property
+    def dragndrop(self) -> DndPage:
+        if 'dragndrop' not in self._cache:
+            self._cache['dragndrop'] = DndPage(self.driver)
+        return self._cache['dragndrop']
+
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""
         pages = {
@@ -55,7 +62,8 @@ class PageFactory:
             'main': self.main,
             'home': self.home,
             'lifetime': self.lifetime,
-            'sqlexec': self.sqlexec
+            'sqlexec': self.sqlex,
+            'dragndrop': self.dragndrop
         }
         page = pages.get(page_name.lower())
         if not page:
