@@ -85,6 +85,39 @@ class BasePage:
                 self.browser.find_element(*locator)
             )
 
+    def switch_to_frame(self, locator):
+        with allure.step('Переключение на необходимый фрейм'):
+            try:
+                element = self.find_element(locator)
+                self.browser.switch_to.frame(element)
+            except Exception as e:
+                raise Exception(f'Не удалось переключиться на фрейм: {e}')
+
+    def switch_to_alert(self):
+        with allure.step('Переключение на алерт'):
+            try:
+                self.browser.switch_to.alert
+            except Exception as e:
+                raise Exception(f'Не удалось переключиться на алерт: {e}')
+
+    def accept_alert(self):
+        with allure.step('Подтверждение алерта'):
+            try:
+                self.wait.until(EC.alert_is_present())
+                alert = self.browser.switch_to.alert
+                alert.accept()
+            except Exception as e:
+                raise Exception(f'Не удалось подтвердить алерт: {e}')
+
+    def fill_alert_input(self, text: str):
+        with allure.step('Заполнение поля в алерте'):
+            try:
+                self.wait.until(EC.alert_is_present())
+                alert = self.browser.switch_to.alert
+                alert.send_keys(text)
+            except Exception as e:
+                raise Exception(f'Не удалось заполнить поле в алерте: {e}')
+
     def get_text_by_locator(self, locator: tuple[str, str]) -> str:
         with allure.step('Получение текста из элемента по локатору'):
             return self.find_element(locator).text
