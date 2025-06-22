@@ -5,6 +5,7 @@ from pages.lifetime_page import LifetimePage
 from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.sqlex_page import SqlexPage
+from pages.tabs_page import TabsPage
 
 
 class PageFactory:
@@ -54,6 +55,12 @@ class PageFactory:
             self._cache['dragndrop'] = DndPage(self.driver)
         return self._cache['dragndrop']
 
+    @property
+    def tabs(self) -> TabsPage:
+        if 'tabs' not in self._cache:
+            self._cache['tabs'] = TabsPage(self.driver)
+        return self._cache['tabs']
+
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""
         pages = {
@@ -63,7 +70,8 @@ class PageFactory:
             'home': self.home,
             'lifetime': self.lifetime,
             'sqlexec': self.sqlex,
-            'dragndrop': self.dragndrop
+            'dragndrop': self.dragndrop,
+            'tabs': self.tabs
         }
         page = pages.get(page_name.lower())
         if not page:
