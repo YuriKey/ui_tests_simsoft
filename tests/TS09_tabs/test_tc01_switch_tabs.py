@@ -1,5 +1,6 @@
 import allure
 
+from data.locators.tabs_locators import TabsLocators as loc
 from data.urls import Urls
 
 urls = Urls()
@@ -15,7 +16,7 @@ def test_switch_tabs(pages):
         page.open(urls.TABS_PAGE)
 
     with allure.step('2. Нажать на ссылку "New Browser Tab"'):
-        page.switch_to_exerc_frame()
+        page.switch_to_frame(loc.FRAME_LOCATOR)
         page.open_new_tab()
 
     with allure.step('3. Перенести фокус на новую вкладку, нажать на ссылку "New Browser Tab"'):
