@@ -8,14 +8,6 @@ class TabsPage(BasePage):
     def __init__(self, browser):
         super().__init__(browser)
 
-    def switch_to_exerc_frame(self):
-        with allure.step('Переключение на фрейм со ссылкой на новую вкладку'):
-            try:
-                element = self.find_element(loc.FRAME_LOCATOR)
-                self.browser.switch_to.frame(element)
-            except Exception as e:
-                raise Exception(f'Не удалось переключиться на фрейм: {e}')
-
     def open_new_tab(self):
         with allure.step('Открытие новой вкладки'):
             try:
