@@ -1,5 +1,6 @@
 from pages.alerts_page import AlertsPage
 from pages.base_page import BasePage
+from pages.basic_auth_page import BasicAuthPage
 from pages.droppable_page import DndPage
 from pages.home_page import HomePage
 from pages.lifetime_page import LifetimePage
@@ -35,8 +36,8 @@ class PageFactory:
     @property
     def home(self) -> HomePage:
         if 'home' not in self._cache:
-            self._cache['main'] = HomePage(self.driver)
-        return self._cache['main']
+            self._cache['home'] = HomePage(self.driver)
+        return self._cache['home']
 
     @property
     def lifetime(self) -> LifetimePage:
@@ -68,6 +69,12 @@ class PageFactory:
             self._cache['alerts'] = AlertsPage(self.driver)
         return self._cache['alerts']
 
+    @property
+    def basic_auth(self) -> BasicAuthPage:
+        if 'basic_auth' not in self._cache:
+            self._cache['basic_auth'] = BasicAuthPage(self.driver)
+        return self._cache['basic_auth']
+
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""
         pages = {
@@ -79,7 +86,8 @@ class PageFactory:
             'sqlexec': self.sqlex,
             'dragndrop': self.dragndrop,
             'tabs': self.tabs,
-            'alerts': self.alerts
+            'alerts': self.alerts,
+            'basic_auth': self.basic_auth
         }
         page = pages.get(page_name.lower())
         if not page:
