@@ -49,14 +49,14 @@ class BasicAuthPage(BasePage):
 
                 reader = easyocr.Reader(['en'])
                 result = reader.readtext(img_bytes, detail=0)
-                credentials = self.parse_credentials(" ".join(result))
+                credentials = self._parse_credentials(" ".join(result))
                 return credentials
 
             except Exception as e:
                 raise Exception(f'Ошибка при получении данных из изображения: {str(e)}')
 
     @staticmethod
-    def parse_credentials(text):
+    def _parse_credentials(text):
         with allure.step('Парсинг текста изображения'):
             try:
                 clean_text = text.replace("HTTP Basic Authentication:", "").strip()
