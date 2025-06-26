@@ -8,3 +8,4 @@ class Urls:
     TABS_PAGE = f"{MAIN_PAGE}way2auto_jquery/frames-and-windows.php"
     NEW_TAB_PAGE = f"{MAIN_PAGE}way2auto_jquery/frames-windows/defult1.html#"
     ALERTS_PAGE = f'{MAIN_PAGE}way2auto_jquery/alert.php#load_box'
+    BASIC_AUTH_PAGE = 'https://www.httpwatch.com/httpgallery/authentication/#showExample10'

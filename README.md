@@ -38,7 +38,11 @@
 │    ├── TS04_parametrized_authorization/           # Параметризованные поверки авторизации на way2automation.com.
 │    ├── TS05_failing_tests_for_screenshot/         # Падающие тесты для проверки создания скриншотов.
 │    ├── TS06_auth_with_cookies/                    # Проверка авторизации с помощью cookies на sql-ex.ru.
-│    ├── TS07_js_executor/                          # Тесты с использованием JavascriptExecutor.
+│    ├── TS07_js_executor/                          # Тесты с использованием JavascriptExecutor. 
+│    ├── TS08_dragndrop                             # Тесты функционала drag`n`drop.
+│    ├── TS09_tabs                                  # Тесты переключения между вкладками.
+│    ├── TS10_alerts                                # Проверка функционала уведомлений.
+│    ├── TS11_basic_auth                            # Проверка Basic Auth на httpwatch.
 │    └── test_cases.md                              # Тест-кейсы
 │
 ├── utils/                                          # Вспомогательные модули.
