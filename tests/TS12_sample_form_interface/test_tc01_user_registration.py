@@ -1,7 +1,9 @@
+import time
+
 import allure
-from data.urls import Urls
 
 from data.locators.registration_page_locators import RegistrationPageLocators as loc
+from data.urls import Urls
 
 urls = Urls()
 
@@ -31,3 +33,4 @@ def test_user_registration(pages):
     with allure.step('4. Проверка сообщение об успешной регистрации'):
         assert reg_page.verify_success_message(), \
             'Сообщение об успешной регистрации не отображается'
+        time.sleep(5)

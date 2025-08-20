@@ -16,6 +16,10 @@ class BasePage:
         with allure.step(f'Поиск элемента по локатору {locator}'):
             return self.wait.until(EC.visibility_of_element_located(locator))
 
+    def find_elements_(self, by: str, selector: str) -> list[WebElement]:
+        with allure.step(f'Поиск элементов по локаторам'):
+            return self.browser.find_elements(by, selector)
+
     def open(self, url: str) -> None:
         with allure.step('Открытие страницы по URL'):
             self.browser.get(url)
