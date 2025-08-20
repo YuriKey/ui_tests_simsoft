@@ -10,7 +10,6 @@ class RegistrationPageLocators:
     GENDER_MALE = (By.XPATH, "//option[@value='male']")
     ABOUT_FIELD = (By.XPATH, "//textarea[@id='about']")
 
-    # Hobbies checkboxes
     HOBBY_SPORTS = (By.XPATH, "//input[@value='Sports']")
     HOBBY_READING = (By.XPATH, "//input[@value='Reading']")
     HOBBY_TRAVELING = (By.XPATH, "//input[@value='Traveling']")
@@ -20,8 +19,4 @@ class RegistrationPageLocators:
     REGISTER_BUTTON = (By.XPATH, "//a[contains(text(), 'Sample Form')]")
     SAMPLE_FORM_BUTTON = (By.XPATH, "//button[@type='submit']")
 
-    # Сообщения
     SUCCESS_MESSAGE = (By.XPATH, "//div[@id='successMessage']")
-
-    # Ссылки?
-    SAMPLE_FORM_LINK = (By.XPATH, "//a[contains(text(), 'Sample Form') or contains(@href, 'registration')]")

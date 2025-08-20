@@ -100,7 +100,9 @@ class BasePage:
     def switch_to_alert(self):
         with allure.step('Переключение на алерт'):
             try:
-                self.browser.switch_to.alert
+                WebDriverWait(self.browser, 5).until(EC.alert_is_present())
+                alert = self.browser.switch_to.alert
+                return alert
             except Exception as e:
                 raise Exception(f'Не удалось переключиться на алерт: {e}')
 

@@ -88,7 +88,7 @@ class RegistrationPage(BasePage):
                 raise Exception(f"Ошибка при заполнении поля About Yourself: {e}")
 
     def click_register_button(self):
-        with allure.step("Нажимаем на кнопку 'Submit'"):
+        with allure.step("Нажимаем на кнопку 'Register'"):
             try:
                 self.click_element(loc.SAMPLE_FORM_BUTTON)
             except Exception as e:
