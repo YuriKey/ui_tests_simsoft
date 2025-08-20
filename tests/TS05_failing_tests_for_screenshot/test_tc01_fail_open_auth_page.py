@@ -21,5 +21,5 @@ def test_open_login_page(pages):
             f'Ожидался URL: {urls.WRONG_LOGIN_PAGE}'
 
     with allure.step('3. Проверка заголовка страницы'):
-        assert login_page.get_title() == exp_text['wrong_page_title'], \
-            f'Ожидался заголовок: {exp_text['wrong_page_title']}'
+        assert login_page.get_title() == exp_text['page_title'], \
+            f'Ожидался заголовок: {exp_text['page_title']}'

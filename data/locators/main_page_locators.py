@@ -31,7 +31,7 @@ class NavigationLocators:
 
 class HeaderLocators:
     HEADER = (By.XPATH, '//*[contains(@class, "main-header-bar site-header-focus-item")]')
-    PHONE1_INDIAN = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+919711-111-558")]')
+    PHONE1_INDIAN = (By.XPATH, '//*[@class="elementor-icon-list-text lazyloaded"][contains(text(), "+919711-111-558")]')
     PHONE2_INDIAN = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+919711-191-558")]')
     PHONE_US = (By.XPATH, '//*[@class="elementor-icon-list-text"][contains(text(), "+1 646-480-0603")]')
     SKYPE_LINK = (By.XPATH, '//*[@class="elementor-icon-list-text"][normalize-space(text()) = "seleniumcoaching"]')

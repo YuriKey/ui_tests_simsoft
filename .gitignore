@@ -2,7 +2,7 @@
 .idea/
 .pytest_cache/
 ._pycache_/
-.env
+
 *.env
 *.xml
 __pycache__/

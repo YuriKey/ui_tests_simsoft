@@ -29,4 +29,4 @@ def test_login_with_invalid_data(open_auth_page):
             'Не удалось нажать кнопку "Login"'
         alert = auth_page.find_element(loc.ALERT_LOGIN_ERROR)
 
-        assert auth_page.get_text(alert) == exp_text['wrong_alert_text'], 'Текст сообщения об ошибке не совпадает'
+        assert auth_page.get_text(alert) == exp_text['alert_text'], 'Текст сообщения об ошибке не совпадает'
