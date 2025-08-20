@@ -8,6 +8,7 @@ from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.sqlex_page import SqlexPage
 from pages.tabs_page import TabsPage
+from pages.registration_page import RegistrationPage
 
 
 class PageFactory:
@@ -74,6 +75,12 @@ class PageFactory:
         if 'basic_auth' not in self._cache:
             self._cache['basic_auth'] = BasicAuthPage(self.driver)
         return self._cache['basic_auth']
+
+    @property
+    def registration(self) -> RegistrationPage:
+        if 'registration' not in self._cache:
+            self._cache['registration'] = RegistrationPage(self.driver)
+        return self._cache['registration']
 
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""

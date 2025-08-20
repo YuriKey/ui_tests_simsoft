@@ -9,3 +9,7 @@ class Urls:
     NEW_TAB_PAGE = f"{MAIN_PAGE}way2auto_jquery/frames-windows/defult1.html#"
     ALERTS_PAGE = f'{MAIN_PAGE}way2auto_jquery/alert.php#load_box'
     BASIC_AUTH_PAGE = 'https://www.httpwatch.com/httpgallery/authentication/#showExample10'
+
+    APP_LOGIN_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/#/login'
+    APP_REG_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/registrationform.html'
+
