@@ -194,4 +194,4 @@ class BasePage:
 
     @staticmethod
     def await_for_js_reaction() -> None:
-        time.sleep(1)
+        time.sleep(2)

@@ -1,4 +1,8 @@
 from pages.alerts_page import AlertsPage
+from pages.app_customers_list_page import CustomersListPage
+from pages.app_manager_main_page import ManagerPage
+from pages.app_read_user_page import ReadUserPage
+from pages.app_registration_page import RegistrationPage
 from pages.base_page import BasePage
 from pages.basic_auth_page import BasicAuthPage
 from pages.droppable_page import DndPage
@@ -8,8 +12,6 @@ from pages.login_page import LoginPage
 from pages.main_page import MainPage
 from pages.sqlex_page import SqlexPage
 from pages.tabs_page import TabsPage
-from pages.app_registration_page import RegistrationPage
-from pages.app_manager_main_page import ManagerPage
 
 
 class PageFactory:
@@ -88,6 +90,18 @@ class PageFactory:
         if 'manager' not in self._cache:
             self._cache['manager'] = ManagerPage(self.driver)
         return self._cache['manager']
+
+    @property
+    def read_user(self) -> ReadUserPage:
+        if 'read_user' not in self._cache:
+            self._cache['read_user'] = ReadUserPage(self.driver)
+        return self._cache['read_user']
+
+    @property
+    def cust_page(self) -> CustomersListPage:
+        if 'cust_page' not in self._cache:
+            self._cache['cust_page'] = CustomersListPage(self.driver)
+        return self._cache['cust_page']
 
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""

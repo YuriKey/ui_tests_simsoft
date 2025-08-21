@@ -14,4 +14,5 @@ class Urls:
     APP_REG_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/registrationform.html'
     APP_MANAGER_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/#/manager'
     APP_ADD_CUSTOMER_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/#/manager/addCust'
+    APP_CUSTOMERS_LIST_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/#/manager/list'
 

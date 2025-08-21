@@ -1,6 +1,5 @@
 import allure
 
-from data.locators.manager_page_locators import ManagerPageLocators as loc
 from data.urls import Urls
 
 urls = Urls()

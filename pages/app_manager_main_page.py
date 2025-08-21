@@ -52,3 +52,38 @@ class ManagerPage(BasePage):
                 self.click_element(loc.SUBMIT_BUTTON)
             except Exception as e:
                 raise Exception(f'Не удалось нажать на кнопку "Submit": {e}')
+
+    def create_new_customer(self):
+        with allure.step('Создание нового пользователя'):
+            user_data = {
+                'first_name': 'Test',
+                'last_name': 'User',
+                'postal_code': '12345'
+            }
+            try:
+                self.click_manager_login_button()
+                self.await_for_js_reaction()
+                self.click_new_customer_button()
+                self.await_for_js_reaction()
+                self.fill_field(loc.FIRST_NAME_FIELD, user_data['first_name'])
+                self.fill_field(loc.LAST_NAME_FIELD, user_data['last_name'])
+                self.fill_field(loc.POSTAL_CODE_FIELD, user_data['postal_code'])
+                self.click_submit_button()
+                self.switch_to_alert()
+                self.accept_alert()
+            except Exception as e:
+                raise Exception(f'Не удалось создать пользователя: {e}')
+
+    def open_account_button(self):
+        with allure.step('Нажатие на кнопку "Open Account"'):
+            try:
+                self.click_element(loc.OPEN_ACCOUNT_BUTTON)
+            except Exception as e:
+                raise Exception(f'Не удалось нажать на кнопку "Open Account": {e}')
+
+    def open_customers_list_button(self):
+        with allure.step('Нажатие на кнопку "Customers"'):
+            try:
+                self.click_element(loc.CUSTOMERS_LIST_BUTTON)
+            except Exception as e:
+                raise Exception(f'Не удалось нажать на кнопку "Customers": {e}')
