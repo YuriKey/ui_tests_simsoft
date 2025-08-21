@@ -74,6 +74,28 @@ class ManagerPage(BasePage):
             except Exception as e:
                 raise Exception(f'Не удалось создать пользователя: {e}')
 
+    def create_random_customer(self):
+        with allure.step('Создание нового пользователя'):
+            user_data = {
+                'first_name': self.fake.first_name(),
+                'last_name': self.fake.last_name(),
+                'postal_code': self.fake.postcode()
+            }
+            try:
+                self.click_manager_login_button()
+                self.await_for_js_reaction()
+                self.click_new_customer_button()
+                self.await_for_js_reaction()
+                self.fill_field(loc.FIRST_NAME_FIELD, user_data['first_name'])
+                self.fill_field(loc.LAST_NAME_FIELD, user_data['last_name'])
+                self.fill_field(loc.POSTAL_CODE_FIELD, user_data['postal_code'])
+                self.click_submit_button()
+                self.switch_to_alert()
+                self.accept_alert()
+                return user_data
+            except Exception as e:
+                raise Exception(f'Не удалось создать пользователя: {e}')
+
     def open_account_button(self):
         with allure.step('Нажатие на кнопку "Open Account"'):
             try:

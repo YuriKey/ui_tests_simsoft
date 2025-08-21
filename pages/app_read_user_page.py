@@ -1,6 +1,7 @@
 import random
 
 import allure
+from selenium.webdriver.common.by import By
 from selenium.webdriver.support.select import Select
 
 from data.locators.read_user_page_locators import ReadUserPageLocators as loc
@@ -15,13 +16,14 @@ class ReadUserPage(BasePage):
     def __init__(self, browser):
         super().__init__(browser)
 
-    def fill_customer_name(self):
-        with allure.step('Заполнение поля "Customer Name" значением "Test User"'):
+    def fill_customer_name(self, name='Test'):
+        with allure.step(f'Заполнение поля "Customer Name" значением "{name}"'):
             try:
                 self.click_element(loc.USER_SELECT)
-                self.click_element(loc.TEST_USER_LOCATOR)
+                option_locator = (By.XPATH, f"//option[contains(text(), '{name}')]")
+                self.click_element(option_locator)
             except Exception as e:
-                raise Exception(f'Не удалось заполнить поле "Customer Name"')
+                raise Exception(f'Не удалось заполнить поле "Customer Name". Ошибка: {e}')
 
     def fill_currency(self):
         with allure.step("Выбираем случайную валюту"):

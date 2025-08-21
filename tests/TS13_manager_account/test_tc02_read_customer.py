@@ -9,17 +9,18 @@ urls = Urls()
 @allure.feature('Аккаунт менеджера банка')
 @allure.story('Чтение пользователя')
 @allure.severity(allure.severity_level.NORMAL)
-def test_read_customer(pages):
+def test_read_customer(pages, create_user):
     man_page = pages.manager
     read_page = pages.read_user
+    user_data = create_user
     man_page.open(urls.APP_LOGIN_PAGE)
+    man_page.click_manager_login_button()
     exp_text = read_page.EXPECTED_TEXTS
-    man_page.create_new_customer()
     man_page.open_account_button()
 
     with allure.step("1. Выбор созданного аккаунта"):
         try:
-            read_page.fill_customer_name()
+            read_page.fill_customer_name(user_data['first_name'])
         except Exception as e:
             raise Exception(f"Не удалось выбрать созданный аккаунт: {e}")
 

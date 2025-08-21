@@ -9,6 +9,8 @@ from drivers.driver_factory import DriverFactory
 from pages.page_factory import PageFactory
 from utils.cookies_helper import CookiesHelper as ch
 
+urls = Urls()
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome",
@@ -126,3 +128,11 @@ def prepare_auth_cookies(pages, request, tmp_path):
         request.addfinalizer(cookies_helper.cleanup)
 
         return cookies_file
+
+
+@pytest.fixture
+def create_user(pages):
+    man_page = pages.manager
+    man_page.open(urls.APP_LOGIN_PAGE)
+    user_data = man_page.create_random_customer()
+    return user_data
