@@ -1,4 +1,5 @@
 import allure
+
 from data.locators.login_page_locators import LoginPageLocators as loc
 from data.urls import Urls
 

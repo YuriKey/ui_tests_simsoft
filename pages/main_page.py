@@ -83,15 +83,24 @@ class MainPage(BasePage):
 
     def get_active_slide_label(self):
         with allure.step('Получение aria-label активного слайда'):
-            active_slide = self.find_element(cl.ACTIVE_SLIDE)
+            try:
+                active_slide = self.find_element(cl.ACTIVE_SLIDE)
+            except Exception as e:
+                raise Exception(f'Не удалось получить активный слайд: {e}')
             return self.get_attribute_(active_slide, 'aria-label')
 
     def next_slide(self):
         with allure.step('Переход к следующему слайду'):
-            self.click_element_by_js(cl.BTN_RIGHT)
-            self.await_for_js_reaction()
+            try:
+                self.click_element_by_js(cl.BTN_RIGHT)
+                self.await_for_js_reaction()
+            except Exception as e:
+                raise Exception(f'Не удалось перейти к следующему слайду: {e}')
 
     def previous_slide(self):
         with allure.step('Переход к предыдущему слайду'):
-            self.click_element_by_js(cl.BTN_LEFT)
-            self.await_for_js_reaction()
+            try:
+                self.click_element_by_js(cl.BTN_LEFT)
+                self.await_for_js_reaction()
+            except Exception as e:
+                raise Exception(f'Не удалось перейти к предыдущему слайду: {e}')

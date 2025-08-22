@@ -11,4 +11,3 @@ class ManagerPageLocators:
     LAST_NAME_FIELD = (By.XPATH, "//input[@ng-model='lName']")
     POSTAL_CODE_FIELD = (By.XPATH, "//input[@ng-model='postCd']")
     SUBMIT_BUTTON = (By.XPATH, "//button[@type='submit']")
-

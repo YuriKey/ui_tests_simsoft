@@ -13,9 +13,9 @@ urls = Urls()
 def test_user_registration(pages):
     reg_page = pages.registration
     exp_text = reg_page.EXPECTED_TEXTS
+    reg_page.open(urls.APP_LOGIN_PAGE)
 
     with allure.step('1. проверка открытия интерфейса Sample Form'):
-        reg_page.open(urls.APP_LOGIN_PAGE)
         reg_page.click_element(loc.REGISTER_BUTTON)
         assert reg_page.get_current_url() == urls.APP_REG_PAGE, \
             'Неверный URL страницы регистрации'

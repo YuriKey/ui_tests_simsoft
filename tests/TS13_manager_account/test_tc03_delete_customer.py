@@ -20,7 +20,6 @@ def test_delete_customer(pages, create_user):
 
     with allure.step('2. Нажатие кнопки "Customers"'):
         man_page.open_customers_list_button()
-        man_page.await_for_js_reaction()
         assert cust_list_page.get_current_url() == urls.APP_CUSTOMERS_LIST_PAGE, \
             'Неверный url страницы Customers'
 

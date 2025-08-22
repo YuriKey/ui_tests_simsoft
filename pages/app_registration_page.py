@@ -28,7 +28,6 @@ class RegistrationPage(BasePage):
             self.fill_about_yourself_with_longest_hobby()
 
     def _generate_user_data(self):
-        """Генерируем данные пользователя"""
         return {
             'first_name': self.fake.first_name(),
             'last_name': self.fake.last_name(),
@@ -52,7 +51,6 @@ class RegistrationPage(BasePage):
                 raise Exception(f"Ошибка при выборе пола: {e}")
 
     def _get_available_hobbies(self):
-        """Получаем уникальные тексты хобби через labels"""
         try:
             labels = self.find_elements_(*loc.HOBBY_LABELS)
 
@@ -66,9 +64,6 @@ class RegistrationPage(BasePage):
             raise Exception(f"Ошибка при поиске labels: {e}")
 
     def _find_longest_hobby_word(self):
-        """
-        Ищем самое длинное слово из списка хобби
-        """
         hobbies = self._get_available_hobbies()
         try:
             longest_word = max(hobbies, key=len)

@@ -43,8 +43,8 @@ def test_login_authorization(open_auth_page, pages, test_case):
 
             with allure.step('5. Проверка текста сообщения'):
                 assert home_page.get_text_by_locator(test_case['expected']['element']) == \
-                        exp_text[test_case['expected']['text_key']], \
-                        'Текст сообщения не соответствует ожидаемому'
+                       exp_text[test_case['expected']['text_key']], \
+                    'Текст сообщения не соответствует ожидаемому'
         else:
             with allure.step('3. Проверка URL страницы'):
                 assert auth_page.get_current_url() != urls.HOME_PAGE, \

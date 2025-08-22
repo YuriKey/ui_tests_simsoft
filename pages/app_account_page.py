@@ -1,8 +1,6 @@
-import allure
 import random
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support import expected_conditions as EC
-from selenium.webdriver.support.wait import WebDriverWait
+
+import allure
 
 from data.locators.account_page_locators import AccountPage as loc
 from pages.base_page import BasePage

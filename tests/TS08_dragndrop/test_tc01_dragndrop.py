@@ -1,4 +1,5 @@
 import allure
+
 from data.locators.droppable_locators import DndLocators as loc
 from data.urls import Urls
 
@@ -33,7 +34,3 @@ def test_dragndrop(pages):
         assert exp_text['text_after'] == text_after, \
             (f'Текст после перетаскивания не совпадает с ожидаемым.'
              f'Ожидаемый: {exp_text['text_after']}, получен: {text_after}')
-
-
-
-

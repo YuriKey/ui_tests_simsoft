@@ -12,9 +12,9 @@ urls = Urls()
 def test_add_new_customer(pages):
     man_page = pages.manager
     exp_text = man_page.EXPECTED_TEXTS
+    man_page.open(urls.APP_LOGIN_PAGE)
 
     with allure.step('1. Проверка открытия интерфейса Bank Manager Login'):
-        man_page.open(urls.APP_LOGIN_PAGE)
         man_page.click_manager_login_button()
         man_page.await_for_js_reaction()
         assert man_page.get_current_url() == urls.APP_MANAGER_PAGE, \

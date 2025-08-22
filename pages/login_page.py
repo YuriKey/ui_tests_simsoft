@@ -1,10 +1,10 @@
 import allure
+from faker import Faker
 
 from data import urls
-from pages.base_page import BasePage
-from faker import Faker
-from data.locators.login_page_locators import LoginPageLocators as lloc
 from data.locators.home_page_locators import HomePageLocators as hloc
+from data.locators.login_page_locators import LoginPageLocators as lloc
+from pages.base_page import BasePage
 
 url = urls.Urls
 fake = Faker()

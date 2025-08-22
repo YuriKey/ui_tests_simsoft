@@ -18,4 +18,3 @@ class Urls:
     APP_CUSTOMER_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/#/customer'
     APP_ACCOUNT_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/#/account'
     APP_TRANSACTIONS_PAGE = f'{MAIN_PAGE}angularjs-protractor/banking/#/listTx'
-

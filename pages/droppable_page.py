@@ -16,8 +16,11 @@ class DndPage(BasePage):
 
     def switch_to_dnd_frame(self):
         with allure.step('Переключение на фрейм drag and drop'):
-            element = self.find_element(loc.FRAME_LOCATOR)
-            self.browser.switch_to.frame(element)
+            try:
+                element = self.find_element(loc.FRAME_LOCATOR)
+                self.browser.switch_to.frame(element)
+            except Exception as e:
+                raise Exception(f'Произошла ошибка при переключении на фрейм drag and drop: {e}')
 
     def drag_and_drop(self, draggable: tuple[str, str], droppable: tuple[str, str]) -> None:
         with allure.step('Перетаскивание элемента'):

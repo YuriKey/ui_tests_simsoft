@@ -19,11 +19,12 @@ class CustomersListPage(BasePage):
                 raise Exception(f'Не удалось заполнить поле поиска. Ошибка: {e}')
 
     def clean_search_field(self):
-        try:
-            element = self.find_element(loc.SEARCH_INPUT)
-            element.clear()
-        except Exception as e:
-            raise Exception(f'Не удалось очистить поле поиска. Ошибка: {e}')
+        with allure.step('Очистка поля поиска'):
+            try:
+                element = self.find_element(loc.SEARCH_INPUT)
+                element.clear()
+            except Exception as e:
+                raise Exception(f'Не удалось очистить поле поиска. Ошибка: {e}')
 
     def delete_button_click(self):
         with allure.step('Нажатие на кнопку "Удалить"'):
@@ -33,17 +34,21 @@ class CustomersListPage(BasePage):
                 raise Exception(f'Не удалось нажать на кнопку "Удалить". Ошибка: {e}')
 
     def get_name_list(self):
-        wait = WebDriverWait(self.browser, 10)
-        table = wait.until(EC.presence_of_element_located((By.TAG_NAME, "table")))
+        with allure.step('Получение списка имен клиентов'):
+            try:
+                wait = WebDriverWait(self.browser, 10)
+                table = wait.until(EC.presence_of_element_located((By.TAG_NAME, "table")))
 
-        rows = table.find_elements(By.TAG_NAME, "tr")[1:]
+                rows = table.find_elements(By.TAG_NAME, "tr")[1:]
 
-        column_index = 0
-        column_data = []
+                column_index = 0
+                column_data = []
 
-        for row in rows:
-            cells = row.find_elements(By.TAG_NAME, "td")
-            if len(cells) > column_index:
-                column_data.append(cells[column_index].text.strip())
+                for row in rows:
+                    cells = row.find_elements(By.TAG_NAME, "td")
+                    if len(cells) > column_index:
+                        column_data.append(cells[column_index].text.strip())
 
-        return column_data
+                return column_data
+            except Exception as e:
+                raise Exception(f'Не удалось получить список имен клиентов. Ошибка: {e}')

@@ -1,8 +1,9 @@
+import allure
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.support.wait import WebDriverWait
-from data.locators.transactions_page_locators import TransactionsPageLocators as loc
 
+from data.locators.transactions_page_locators import TransactionsPageLocators as loc
 from pages.base_page import BasePage
 
 
@@ -39,46 +40,59 @@ class TransactionsPage(BasePage):
         return transactions
 
     def find_transaction(self, amount, type_) -> bool:
-        transactions = self.get_all_transactions()
+        with allure.step('Поиск транзакции по сумме и типу'):
+            try:
+                transactions = self.get_all_transactions()
 
-        for transaction in transactions:
-            if (transaction["amount"] == amount and
-                    transaction["type"] == type_.lower()):
-                return True
+                for transaction in transactions:
+                    if (transaction["amount"] == amount and
+                            transaction["type"] == type_.lower()):
+                        return True
 
-        return False
+                return False
+            except Exception as e:
+                raise Exception(f'Не удалось найти транзакцию по сумме и типу: {e}')
 
     def _get_credits_sum(self) -> int:
-        all_transactions = self.get_all_transactions()
-        total = 0
-        for transaction in all_transactions:
-            if transaction.get('type') == 'credit':
-                total += transaction.get('amount', 0)
-        return total
+        try:
+            all_transactions = self.get_all_transactions()
+            total = 0
+            for transaction in all_transactions:
+                if transaction.get('type') == 'credit':
+                    total += transaction.get('amount', 0)
+            return total
+        except Exception as e:
+            raise Exception(f'Ошибка при подсчете суммы пополнений: {e}')
 
     def _get_debits_sum(self) -> int:
-        all_transactions = self.get_all_transactions()
-        total = 0
-        for transaction in all_transactions:
-            if transaction.get('type') == 'debit':
-                total += transaction.get('amount', 0)
-        return total
+        try:
+            all_transactions = self.get_all_transactions()
+            total = 0
+            for transaction in all_transactions:
+                if transaction.get('type') == 'debit':
+                    total += transaction.get('amount', 0)
+            return total
+        except Exception as e:
+            raise Exception(f'Ошибка при подсчете суммы списаний: {e}')
 
     def get_balance_by_table(self) -> int:
-        try:
-            balance = self._get_credits_sum() - self._get_debits_sum()
-            return balance
-        except Exception as e:
-            raise Exception(f'Не удалось получить баланс из таблицы транзакций: {e}')
+        with allure.step('Получение баланса из таблицы транзакций'):
+            try:
+                balance = self._get_credits_sum() - self._get_debits_sum()
+                return balance
+            except Exception as e:
+                raise Exception(f'Не удалось получить баланс из таблицы транзакций: {e}')
 
     def click_reset_button(self):
-        try:
-            self.click_element(loc.RESET_BUTTON)
-        except Exception as e:
-            raise Exception(f'Не удалось нажать кнопку сброса: {e}')
+        with allure.step('Нажатие кнопки сброса'):
+            try:
+                self.click_element(loc.RESET_BUTTON)
+            except Exception as e:
+                raise Exception(f'Не удалось нажать кнопку сброса: {e}')
 
     def click_back_button(self):
-        try:
-            self.click_element(loc.BACK_BUTTON)
-        except Exception as e:
-            raise Exception(f'Не удалось нажать кнопку назад: {e}')
+        with allure.step('Нажатие кнопки "Назад"'):
+            try:
+                self.click_element(loc.BACK_BUTTON)
+            except Exception as e:
+                raise Exception(f'Не удалось нажать кнопку "Назад": {e}')

@@ -176,7 +176,7 @@ def login_new_user_with_history(pages, login_new_user_with_notnull_balance):
         acc_page.get_random_deposit_amount(current_balance=10000),
         acc_page.get_random_deposit_amount(current_balance=10000),
         acc_page.get_random_deposit_amount(current_balance=10000)
-        )
+    )
     withdraw_values = (
         acc_page.get_random_deposit_amount(current_balance=10000),
         acc_page.get_random_deposit_amount(current_balance=10000),

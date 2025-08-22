@@ -11,7 +11,5 @@ class AccountPage:
     INFO_MESSAGE = (By.XPATH, "//span[@class='error ng-binding']")
     HELLO_MESSAGE = (By.XPATH, "//strong[contains(., 'Welcome')]")
 
-    BALANCE_LOCATOR = (By.XPATH, "//div[@class='center']/strong[preceding-sibling::text()[1][contains(., 'Balance :')]]")
-
-
-
+    BALANCE_LOCATOR = (
+        By.XPATH, "//div[@class='center']/strong[preceding-sibling::text()[1][contains(., 'Balance :')]]")

@@ -107,5 +107,6 @@ class ManagerPage(BasePage):
         with allure.step('Нажатие на кнопку "Customers"'):
             try:
                 self.click_element(loc.CUSTOMERS_LIST_BUTTON)
+                self.await_for_js_reaction()
             except Exception as e:
                 raise Exception(f'Не удалось нажать на кнопку "Customers": {e}')
