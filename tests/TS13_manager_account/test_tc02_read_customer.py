@@ -19,22 +19,13 @@ def test_read_customer(pages, create_user):
     man_page.open_account_button()
 
     with allure.step("1. Выбор созданного аккаунта"):
-        try:
-            read_page.fill_customer_name(user_data['first_name'])
-        except Exception as e:
-            raise Exception(f"Не удалось выбрать созданный аккаунт: {e}")
+        read_page.fill_customer_name(user_data['first_name'])
 
     with allure.step("2. Выбор валюты"):
-        try:
-            read_page.fill_currency()
-        except Exception as e:
-            raise Exception(f"Не удалось выбрать валюту: {e}")
+        read_page.fill_currency()
 
     with allure.step("3. Нажатие кнопки 'Process'"):
-        try:
-            read_page.process_button_click()
-        except Exception as e:
-            raise Exception(f"Не удалось нажать кнопку 'Process': {e}")
+        read_page.click_process_button()
 
     with allure.step("4. Проверка появления всплывающего окна"):
         alert = man_page.switch_to_alert()

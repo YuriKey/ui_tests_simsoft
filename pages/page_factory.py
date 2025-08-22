@@ -1,8 +1,11 @@
 from pages.alerts_page import AlertsPage
+from pages.app_account_page import AccountPage
+from pages.app_customer_login_page import CustomerLoginPage
 from pages.app_customers_list_page import CustomersListPage
 from pages.app_manager_main_page import ManagerPage
 from pages.app_read_user_page import ReadUserPage
 from pages.app_registration_page import RegistrationPage
+from pages.app_transactions_page import TransactionsPage
 from pages.base_page import BasePage
 from pages.basic_auth_page import BasicAuthPage
 from pages.droppable_page import DndPage
@@ -98,10 +101,28 @@ class PageFactory:
         return self._cache['read_user']
 
     @property
-    def cust_page(self) -> CustomersListPage:
+    def cust_list_page(self) -> CustomersListPage:
         if 'cust_page' not in self._cache:
             self._cache['cust_page'] = CustomersListPage(self.driver)
         return self._cache['cust_page']
+
+    @property
+    def customer(self) -> CustomerLoginPage:
+        if 'customer' not in self._cache:
+            self._cache['customer'] = CustomerLoginPage(self.driver)
+        return self._cache['customer']
+
+    @property
+    def account(self) -> AccountPage:
+        if 'account' not in self._cache:
+            self._cache['account'] = AccountPage(self.driver)
+        return self._cache['account']
+
+    @property
+    def transactions(self) -> TransactionsPage:
+        if 'transactions' not in self._cache:
+            self._cache['transactions'] = TransactionsPage(self.driver)
+        return self._cache['transactions']
 
     def get_page(self, page_name: str):
         """Для параметризованных тестов."""

@@ -18,5 +18,6 @@ class RegistrationPageLocators:
 
     REGISTER_BUTTON = (By.XPATH, "//a[contains(text(), 'Sample Form')]")
     SAMPLE_FORM_BUTTON = (By.XPATH, "//button[@type='submit']")
+    CUSTOMER_LOGIN_BUTTON = (By.XPATH, "//button[@ng-click='customer()']")
 
     SUCCESS_MESSAGE = (By.XPATH, "//div[@id='successMessage']")

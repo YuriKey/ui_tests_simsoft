@@ -19,8 +19,11 @@ class CustomersListPage(BasePage):
                 raise Exception(f'Не удалось заполнить поле поиска. Ошибка: {e}')
 
     def clean_search_field(self):
-        element = self.find_element(loc.SEARCH_INPUT)
-        element.clear()
+        try:
+            element = self.find_element(loc.SEARCH_INPUT)
+            element.clear()
+        except Exception as e:
+            raise Exception(f'Не удалось очистить поле поиска. Ошибка: {e}')
 
     def delete_button_click(self):
         with allure.step('Нажатие на кнопку "Удалить"'):

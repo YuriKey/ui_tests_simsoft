@@ -5,5 +5,6 @@ class ReadUserPageLocators:
     USER_SELECT = (By.XPATH, "//select[@name='userSelect']")
     CURRENCY_SELECT = (By.XPATH, "//select[@name='currency']")
     PROCESS_BUTTON = (By.XPATH, "//button[@type='submit']")
+    HOME_BUTTON = (By.XPATH, "//button[@ng-click='home()']")
 
     TEST_USER_LOCATOR = (By.XPATH, "//*[contains(text(), 'Test User')]")

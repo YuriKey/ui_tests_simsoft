@@ -46,9 +46,16 @@ class ReadUserPage(BasePage):
             except Exception as e:
                 raise Exception(f"Не удалось выбрать валюту: {e}")
 
-    def process_button_click(self):
+    def click_process_button(self):
         with allure.step('Нажатие на кнопку "Process"'):
             try:
                 self.click_element(loc.PROCESS_BUTTON)
             except Exception as e:
-                raise Exception(f'Не удалось нажать на кнопку "Process"')
+                raise Exception(f'Не удалось нажать на кнопку "Process": {e}')
+
+    def click_home_button(self):
+        with allure.step('Нажатие на кнопку "Home"'):
+            try:
+                self.click_element(loc.HOME_BUTTON)
+            except Exception as e:
+                raise Exception(f'Не удалось нажать на кнопку "Home": {e}')

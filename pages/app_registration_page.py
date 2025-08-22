@@ -104,3 +104,10 @@ class RegistrationPage(BasePage):
                 f"Неверное сообщение об успехе. Ожидалось: '{expected_text}', Получено: '{actual_text}'"
 
             return True
+
+    def click_customer_login(self):
+        with allure.step("Нажимаем на кнопку 'Customer Login'"):
+            try:
+                self.click_element(loc.CUSTOMER_LOGIN_BUTTON)
+            except Exception as e:
+                raise Exception(f"Ошибка при нажатии на кнопку 'Customer Login': {e}")
