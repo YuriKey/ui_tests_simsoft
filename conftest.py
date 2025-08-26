@@ -9,6 +9,8 @@ from drivers.driver_factory import DriverFactory
 from pages.page_factory import PageFactory
 from utils.cookies_helper import CookiesHelper as ch
 
+urls = Urls()
+
 
 def pytest_addoption(parser):
     parser.addoption("--browser", action="store", default="chrome",
@@ -65,7 +67,6 @@ def login(open_auth_page, pages):
         page.fill_field(loc.PASSWORD_FIELD, 'password')
         page.fill_field(loc.USERNAME_DESC_FIELD, 'angular')
         page.click_element(loc.LOGIN_BUTTON)
-
         open_auth_page.is_element_visible(hloc.LOGOUT_BUTTON), 'Кнопка выхода не отобразилась после логина'
         return pages.home
 
@@ -114,15 +115,79 @@ def prepare_auth_cookies(pages, request, tmp_path):
         cookies_file = tmp_path / "test_cookies.json"
         sqlex_page = pages.sqlex.open_page()
         cookies_helper = ch(sqlex_page, str(cookies_file))
-
         sqlex_page.sqlex_login()
-
         cookies = cookies_helper.get_cookies()
-
         ch.save_cookies_to_file(cookies, str(cookies_file))
-
         cookies_helper.delete_browser_cookies()
-
         request.addfinalizer(cookies_helper.cleanup)
-
         return cookies_file
+
+
+@pytest.fixture
+def create_user(pages):
+    with allure.step('Создание пользователя со случайными данными'):
+        man_page = pages.manager
+        man_page.open(urls.APP_LOGIN_PAGE)
+        user_data = man_page.create_random_customer()
+        return user_data
+
+
+@pytest.fixture
+def create_active_account(pages):
+    with allure.step('Создание активного счета'):
+        man_page = pages.manager
+        read_page = pages.read_user
+        man_page.open(urls.APP_LOGIN_PAGE)
+        user_data = man_page.create_random_customer()
+        man_page.open_account_button()
+        read_page.fill_customer_name(f"{user_data['first_name']} {user_data['last_name']}")
+        read_page.fill_currency()
+        read_page.click_process_button()
+        man_page.switch_to_alert()
+        man_page.accept_alert()
+        read_page.click_home_button()
+        return user_data
+
+
+@pytest.fixture
+def login_new_user(pages, create_active_account):
+    with allure.step('Авторизация пользователя с активным счетом'):
+        reg_page = pages.registration
+        cust_page = pages.customer
+        user_data = create_active_account
+        user_full_name = f"{user_data['first_name']} {user_data['last_name']}"
+        reg_page.click_customer_login()
+        cust_page.customer_select(user_full_name)
+        cust_page.click_login_button()
+
+
+@pytest.fixture
+def login_new_user_with_notnull_balance(pages, login_new_user):
+    acc_page = pages.account
+    acc_page.click_deposit_button()
+    acc_page.fill_amount_field(amount=100321)
+    acc_page.click_submit_button()
+
+
+@pytest.fixture
+def login_new_user_with_history(pages, login_new_user_with_notnull_balance):
+    acc_page = pages.account
+    deposit_values = (
+        acc_page.get_random_deposit_amount(current_balance=10000),
+        acc_page.get_random_deposit_amount(current_balance=10000),
+        acc_page.get_random_deposit_amount(current_balance=10000)
+    )
+    withdraw_values = (
+        acc_page.get_random_deposit_amount(current_balance=10000),
+        acc_page.get_random_deposit_amount(current_balance=10000),
+        acc_page.get_random_deposit_amount(current_balance=10000)
+    )
+    for value in deposit_values:
+        acc_page.fill_amount_field(value)
+        acc_page.click_submit_button()
+
+    acc_page.click_withdrawl_button()
+
+    for value in withdraw_values:
+        acc_page.fill_amount_field(value)
+        acc_page.click_submit_button()

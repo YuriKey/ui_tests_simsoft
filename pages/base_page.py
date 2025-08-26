@@ -16,6 +16,10 @@ class BasePage:
         with allure.step(f'Поиск элемента по локатору {locator}'):
             return self.wait.until(EC.visibility_of_element_located(locator))
 
+    def find_elements_(self, by: str, selector: str) -> list[WebElement]:
+        with allure.step(f'Поиск элементов по локаторам'):
+            return self.browser.find_elements(by, selector)
+
     def open(self, url: str) -> None:
         with allure.step('Открытие страницы по URL'):
             self.browser.get(url)
@@ -96,7 +100,9 @@ class BasePage:
     def switch_to_alert(self):
         with allure.step('Переключение на алерт'):
             try:
-                self.browser.switch_to.alert
+                WebDriverWait(self.browser, 5).until(EC.alert_is_present())
+                alert = self.browser.switch_to.alert
+                return alert
             except Exception as e:
                 raise Exception(f'Не удалось переключиться на алерт: {e}')
 
@@ -188,4 +194,4 @@ class BasePage:
 
     @staticmethod
     def await_for_js_reaction() -> None:
-        time.sleep(1)
+        time.sleep(2)

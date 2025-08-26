@@ -2,8 +2,8 @@ import allure
 import pytest
 from faker import Faker
 
-from data.locators.login_page_locators import LoginPageLocators as lloc
 from data.locators.home_page_locators import HomePageLocators as hloc
+from data.locators.login_page_locators import LoginPageLocators as lloc
 from data.urls import Urls
 
 urls = Urls()
@@ -47,8 +47,8 @@ def test_login_authorization(open_auth_page, pages, name, username, password, us
                     'Заголовок страницы не соответствует ожидаемому'
             with allure.step('5. Проверка текста сообщения'):
                 assert home_page.get_text_by_locator(hloc.SUCCESS_MESSAGE) == \
-                        exp_text['success_text'], \
-                        'Текст сообщения не соответствует ожидаемому'
+                       exp_text['success_text'], \
+                    'Текст сообщения не соответствует ожидаемому'
         else:
             with allure.step('3. Проверка URL страницы'):
                 assert auth_page.get_current_url() != urls.HOME_PAGE, \
